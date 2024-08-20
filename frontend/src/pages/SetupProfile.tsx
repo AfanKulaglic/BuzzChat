@@ -34,7 +34,7 @@ const SetupProfile: React.FC = () => {
     }
 
     try {
-      await axios.post('https://backend-fgom.onrender.com/api/data', {
+      await axios.post('https://chattappbuzz.onrender.com/api/data', {
         nickname,
         image: imageUrl,
         email, // Including email in the request

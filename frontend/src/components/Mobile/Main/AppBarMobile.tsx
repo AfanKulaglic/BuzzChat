@@ -28,7 +28,8 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({ userName, userImage, curren
     };
 
     const filteredData = data.filter(item =>
-        item.nickname.toLowerCase().includes(searchInput.toLowerCase())
+        item.nickname.toLowerCase().includes(searchInput.toLowerCase()) &&
+        item.nickname.toLowerCase() !== userName.toLowerCase()
     );
 
     return (

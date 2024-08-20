@@ -16,7 +16,7 @@ const AdminDashboard = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get<DataItem[]>('https://backend-fgom.onrender.com/api/data');
+            const response = await axios.get<DataItem[]>('https://chattappbuzz.onrender.com/api/data');
             setData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
     const handleDataSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post<DataItem>('https://backend-fgom.onrender.com/api/data', {
+            const response = await axios.post<DataItem>('https://chattappbuzz.onrender.com/api/data', {
                 field1,
                 field2,
             });
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
 
     const handleDelete = async (id: string) => {
         try {
-            await axios.delete(`https://backend-fgom.onrender.com/api/data/${id}`);
+            await axios.delete(`https://chattappbuzz.onrender.com/api/data/${id}`);
             setData(data.filter(item => item._id !== id));
         } catch (error) {
             console.error('Error deleting data:', error);

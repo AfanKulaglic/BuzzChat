@@ -2,9 +2,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import WindowIcon from '@mui/icons-material/Window';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface NavigationMobileProps {
   onTabChange: (newValue: number) => void;
@@ -38,12 +38,12 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
         }}
       >
         <BottomNavigationAction
-          label="Recents"
-          icon={<RestoreIcon sx={{ color: value === 0 ? 'purple' : 'white' }} />}
+          label="Home"
+          icon={<WindowIcon sx={{ fontSize: '25px', color: value === 0 ? '#6559a2' : 'white' }} />}
           sx={{
             '& .MuiBottomNavigationAction-label': {
-              fontSize: '1.5vh',
-              color: value === 0 ? 'purple' : 'rgba(255, 255, 255, 0.7)',
+              fontSize: '15px',
+              color: value === 0 ? '#6559a2' : 'rgba(255, 255, 255, 0.7)',
             },
             '&.Mui-selected': {
               backgroundColor: 'transparent',
@@ -52,18 +52,18 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
                 padding: '0px',
               },
               '& .MuiBottomNavigationAction-label': {
-                fontSize: '1.5vh', // reset font size
+                fontSize: '15px', // reset font size
               },
             },
           }}
         />
         <BottomNavigationAction
-          label="Favorites"
-          icon={<FavoriteIcon sx={{ color: value === 1 ? 'purple' : 'white' }} />}
+          label="Explore"
+          icon={<TravelExploreIcon sx={{ fontSize: '25px', color: value === 1 ? '#6559a2' : 'white' }} />}
           sx={{
             '& .MuiBottomNavigationAction-label': {
-              fontSize: '1.5vh',
-              color: value === 1 ? 'purple' : 'rgba(255, 255, 255, 0.7)',
+              fontSize: '15px',
+              color: value === 1 ? '#6559a2' : 'rgba(255, 255, 255, 0.7)',
             },
             '&.Mui-selected': {
               backgroundColor: 'transparent',
@@ -72,18 +72,18 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
                 padding: '0px',
               },
               '& .MuiBottomNavigationAction-label': {
-                fontSize: '1.5vh', // reset font size
+                fontSize: '15px', // reset font size
               },
             },
           }}
         />
         <BottomNavigationAction
-          label="Nearby"
-          icon={<LocationOnIcon sx={{ color: value === 2 ? 'purple' : 'white' }} />}
+          label="Settings"
+          icon={<SettingsIcon sx={{ fontSize: '25px', color: value === 2 ? '#6559a2' : 'white' }} />}
           sx={{
             '& .MuiBottomNavigationAction-label': {
-              fontSize: '1.5vh',
-              color: value === 2 ? 'purple' : 'rgba(255, 255, 255, 0.7)',
+              fontSize: '15px',
+              color: value === 2 ? '#6559a2' : 'rgba(255, 255, 255, 0.7)',
             },
             '&.Mui-selected': {
               backgroundColor: 'transparent',
@@ -92,7 +92,7 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
                 padding: '0px',
               },
               '& .MuiBottomNavigationAction-label': {
-                fontSize: '1.5vh', // reset font size
+                fontSize: '15px', // reset font size
               },
             },
           }}

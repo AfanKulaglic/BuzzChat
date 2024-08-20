@@ -1,8 +1,6 @@
 import React from "react";
-import { Grid, Paper } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { clearUser } from "../../../store/userSlice";
 
 interface DataItem {
   _id: string;
@@ -11,13 +9,13 @@ interface DataItem {
   image: string;
 }
 
-interface MainContentMobileProps {
+interface ExploreContentMobileProps {
   userName: string;
   userImage: string; // Path to user's image
   data: DataItem[]; // Array of data items
 }
 
-export const MainContentMobile: React.FC<MainContentMobileProps> = ({
+export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
   userName,
   userImage,
   data,
@@ -32,48 +30,39 @@ export const MainContentMobile: React.FC<MainContentMobileProps> = ({
     navigate(`/chat/${nickname}`);
   };
 
-  const dispatch = useDispatch();
-
-    const handleLogout = () => {
-        dispatch(clearUser());
-        navigate('/')
-    };
-
   return (
-    <div className="main-content-mobile-container">
+    <div className="explore-content-mobile-container">
       <Grid container spacing={2}>
         {/* First Row: User Info */}
         <Grid item xs={6}>
-          <Paper className="main-content-mobile-user-section">
-            <img
+          <div className="explore-content-mobile-user-section" >
+            <img 
               src={userImage}
               alt={userName}
-              className="main-content-mobile-image"
+              className="explore-content-mobile-image"
             />
-            <p className="main-content-mobile-username">{userName}</p>
-          </Paper>
+            <h3 className="explore-content-mobile-username">{userName}</h3>
+          </div>
         </Grid>
 
         {/* Data Items Rows */}
         {filteredData.map((item) => (
           <Grid item xs={6} key={item._id}>
-            <Paper
-              className="main-content-mobile-item"
+            <div
+              className="explore-content-mobile-item"
               onClick={() => handleItemClick(item.nickname)}
               style={{ cursor: "pointer" }}
             >
               <img
                 src={item.image}
                 alt={`${item.nickname} icon`}
-                className="main-content-mobile-image"
+                className="explore-content-mobile-image"
               />
-              <p className="main-content-mobile-username">{item.nickname}</p>
-            </Paper>
+              <h3 className="explore-content-mobile-username">{item.nickname}</h3>
+            </div>
           </Grid>
         ))}
       </Grid>
-
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

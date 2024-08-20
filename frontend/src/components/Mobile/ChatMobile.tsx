@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, KeyboardEvent } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("https://backend-fgom.onrender.com");
+const socket = io("https://chattappbuzz.onrender.com/");
 
 interface ChatMobileProps {
   friendUsername?: string;
@@ -38,7 +38,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
   const fetchData = async () => {
     try {
       const response = await axios.get<DataItem[]>(
-        "https://backend-fgom.onrender.com/api/data"
+        "https://chattappbuzz.onrender.com/api/data"
       );
       const friend = response.data.find(
         (item) => item.nickname === friendUsername
@@ -57,57 +57,67 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
   const sendMessage = async () => {
     if (isSending.current || !friendData || !userData || !inputValue.trim()) return;
     isSending.current = true;
-
+  
     try {
-      const message: Message = {
+      const messageForFriend: Message = {
         user: userUsername,
         content: inputValue,
         timestamp: new Date().toISOString(),
         toUser: friendUsername || "",
         _id: new Date().toISOString(), // Unique identifier for the message
       };
-
+  
+      const messageForUser: Message = {
+        user: userUsername,
+        content: inputValue,
+        timestamp: new Date().toISOString(),
+        toUser: friendUsername || "ghost",
+        _id: new Date().toISOString(), // Unique identifier for the message
+      };
+  
       // Send message to the backend for both friend and user
       await axios.patch(
-        `https://backend-fgom.onrender.com/api/data/${friendData._id}/messages`,
-        message
+        `https://chattappbuzz.onrender.com/api/data/${friendData._id}/messages`,
+        messageForFriend
       );
       await axios.patch(
-        `https://backend-fgom.onrender.com/api/data/${userData._id}/messages`,
-        message
+        `https://chattappbuzz.onrender.com/api/data/${userData._id}/messages`,
+        messageForUser
       );
-
+  
       // Update local state to reflect the change immediately
       setFriendData((prev) => {
         if (prev) {
           const messageExists = prev.messages.some(
-            (m) => m._id === message._id
+            (m) => m._id === messageForFriend._id
           );
           if (!messageExists) {
             return {
               ...prev,
-              messages: [...prev.messages, message],
+              messages: [...prev.messages, messageForFriend],
             };
           }
         }
         return prev;
       });
-
+  
       setUserData((prev) => {
         if (prev) {
           const messageExists = prev.messages.some(
-            (m) => m._id === message._id
+            (m) => m._id === messageForUser._id
           );
           if (!messageExists) {
             return {
               ...prev,
-              messages: [...prev.messages, message],
+              messages: [...prev.messages, messageForUser],
             };
           }
         }
         return prev;
       });
 
+      
+  
       // Clear the input field after sending the message
       setInputValue("");
     } catch (error) {
@@ -116,6 +126,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
       isSending.current = false;
     }
   };
+  
 
   useEffect(() => {
     fetchData();
@@ -160,18 +171,15 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
   }, [friendUsername, friendData, userUsername, userData]);
 
   const filteredMessages = [
-    ...(friendData?.messages.filter(
-      (message) =>
-        (message.user === userUsername && message.toUser === friendUsername) ||
-        (message.user === friendUsername && message.toUser === userUsername)
-    ) || []),
     ...(userData?.messages.filter(
       (message) =>
         (message.user === userUsername && message.toUser === friendUsername) ||
-        (message.user === friendUsername && message.toUser === userUsername)
-    ) || []),
+        (message.user === friendUsername && message.toUser === userUsername) ||
+        (message.user === friendUsername && message.toUser === friendUsername) ||
+        (message.user === userUsername && message.toUser === userUsername)
+    ) || [])
   ];
-
+  
   // Sort messages by timestamp
   const sortedMessages = filteredMessages.sort((a, b) =>
     new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()

@@ -30,7 +30,7 @@ const Chat: React.FC = () => {
     // Fetch data from the server and find the matching friend
     const fetchData = async () => {
         try {
-            const response = await axios.get<DataItem[]>('https://backend-fgom.onrender.com/api/data');
+            const response = await axios.get<DataItem[]>('https://chattappbuzz.onrender.com/api/data');
             const data = response.data;
 
             // Find the friend with the matching nickname

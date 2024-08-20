@@ -189,28 +189,37 @@ body {
 
 
 
-/* General Container Styling */
+/* Container Styling */
 .slider-container {
     background-color: silver;
     position: relative;
     width: 100vw;
     margin: 0 auto;
     overflow: hidden;
-    height: 100vh; /* Adjust based on content height */
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+  
+  /* Slides Wrapper Styling */
+  .slides-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
   }
   
   /* Slide Styling */
   .slide {
     position: absolute;
-    width: 100;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     opacity: 0;
     transform: translateX(100%);
   }
@@ -227,15 +236,16 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 100%;
     max-width: 600px;
+    width: 80vw;
+    margin: 0 auto;
   }
   
-  /* Input and Button Styling */
+  /* Input Styling */
   input[type="text"],
   input[type="file"] {
     display: block;
-    width: 50vw;
+    width: calc(100% - 20px);
     margin: 10px auto;
     padding: 10px;
     border-radius: 5px;
@@ -243,22 +253,26 @@ body {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  input[type="text"] {
-    font-size: 16px;
-  }
-  
-  input[type="file"] {
-    padding: 0;
+  /* Button Styling */
+  .nav-btn {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   button {
+    display: block;
+    width: 80%;
+    margin: 10px;
+    padding: 12px;
     background-color: #007bff;
-    color: #fff;
+    color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
@@ -280,8 +294,7 @@ body {
     border-radius: 10px;
     margin-top: 10px;
   }
-  
-  
+}
   
 
 
@@ -309,14 +322,17 @@ body {
 
 .app-bar-mobile-container {
     background-color: #2b2b2b;
-    height: 15vh;
+    height: 140px;
+    top: 0;
+    width: 100vw;
+    position: fixed;
 }
 
 .app-bar-mobile-top-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1vh;
+    padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -327,8 +343,8 @@ body {
 
 .app-bar-mobile-user-image {
     border-radius: 50%;
-    width: 3.5vh;
-    height: 3.5vh;
+    width: 35px;
+    height: 35px;
     border: 2px solid red;
     margin-right: 10px;
     color: white;
@@ -337,12 +353,12 @@ body {
 .app-bar-mobile-user-name {
     font-weight: bold;
     color: white;
-    padding-top: 1vh;
-    font-size: 1.7vh;
+    padding-top: 10px;
+    font-size: 17px;
 }
 
 .app-bar-mobile-right-section {
-    font-size: 1.4vh;
+    font-size: 14px;
 }
 
 .app-bar-mobile-date-display {
@@ -350,41 +366,42 @@ body {
 }
 
 .app-bar-mobile-search-container {
-    padding: 0.5vh
+    padding: 5px;
 }
 
 #app-bar-mobile-search-input {
-    width: 90vw;
-    height: 2vh;
-    padding: 1vh;
+    width: 90%;
+    height: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
-    font-size: 1.8vh;
+    font-size: 18px;
+    border: 2px solid red;
 }
 
 .app-bar-mobile-search-results {
-    margin-top: 1vh;
+    margin-top: 10px;
+    background-color: #2b2b2b;
 }
 
 .app-bar-mobile-search-result-item {
     display: flex;
     align-items: center;
     padding: 0.5vh 0;
-    border: 2px solid red;
 }
 
 .app-bar-mobile-search-result-name {
     color: white;
-    font-size: 1.5vh;
-    padding-top: 1vh;
+    font-size: 15px;
+    padding-top: 10px;
 }
 
 .app-bar-mobile-nickname-icon {
     border-radius: 50%;
-    width: 2.5vh;
-    height: 2.5vh;
-    margin-right: 1vh;
-    margin-left: 1vh;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    margin-left: 10px;
     border: 2px solid red;
 }
 
@@ -398,27 +415,33 @@ body {
 
 
 
-.main-content-mobile-container {
+.explore-content-mobile-container {
     padding: 1.5vh;
-    background-color: silver;
-    height: 85vh;
+    background-color: white;
+    height: 80vh;
+    border: 2px solid green;
+    margin-top: 15vh;
 }
 
-.main-content-mobile-top-row {
+.explore-content-mobile-top-row {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.main-content-mobile-user-section {
+.explore-content-mobile-user-section {
     display: flex;
     align-items: center;
     flex: 1;
     padding: 1vh;
-    border: 2px solid red;
+    margin-left: -2vh;
+    border: 2px solid black;
+    background-color: #2b2b2b;
+    color: white;
+    border-radius: 5px;
 }
 
-.main-content-mobile-image {
+.explore-content-mobile-image {
     border-radius: 50%;
     width: 6vh;
     height: 6vh;
@@ -427,56 +450,57 @@ body {
     margin-top: 0vh;
 }
 
-.main-content-mobile-user-info {
+.explore-content-mobile-user-info {
     display: flex;
     flex-direction: column;
 }
 
-.main-content-mobile-username {
+.explore-content-mobile-username {
     border: 2px solid red;
     font-size: 1.7vh;
 }
 
-.main-content-mobile-user-email {
+.explore-content-mobile-user-email {
     color: #555;
     font-size: 14px;
 }
 
-.main-content-mobile-grid {
+.explore-content-mobile-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust min-width for responsive design */
     gap: 10px;
 }
 
-.main-content-mobile-user-item {
+.explore-content-mobile-user-item {
     grid-column: span 2; /* Make sure the user item spans two columns */
     display: flex;
     align-items: center;
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid white;
     border-radius: 4px;
 }
 
-.main-content-mobile-item {
+.explore-content-mobile-item {
     display: flex;
     align-items: center;
     padding: 1vh;
     border: 1px solid #ddd;
     border-radius: 4px;
-    border: 2px solid blue;
+    border: 2px solid black;
     display: flex;
     align-items: center;
     padding: 1vh;
+    background-color: #0000003a;
 }
 
-.main-content-mobile-item-image {
+.explore-content-mobile-item-image {
     border-radius: 50%;
     width: 30px;
     height: 30px;
     margin-right: 10px;
 }
 
-.main-content-mobile-item-nickname {
+.explore-content-mobile-item-nickname {
     font-weight: bold;
 }
 
@@ -486,13 +510,108 @@ body {
 
 
 
+.home-content-mobile-container {
+    background-color: white;
+    padding-top: 10px;
+    overflow-x: scroll;
+    margin-top: 130px;
+}
+
+.home-content-mobile-item-section {
+    border-bottom: 2px solid black;
+    background-color: #00000000;
+    display: flex;
+    padding: 20px;
+    height: 50px;
+}
+
+.home-content-mobile-img {
+    border: 2px solid red;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.home-content-mobile-section {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.home-content-mobile-username {
+    margin: 0px;
+    font-size: 18px;
+}
+
+.home-content-mobile-message {
+    margin: 0px;
+    font-size: 15px;
+    margin-top: auto;
+}
+
+.home-content-mobile-timestamp {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 13px;
+}
+
+
+
+
+
+.settings-content-mobile-container {
+    margin-top: 15vh;
+    border: 2px solid red;
+    padding-top: 1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-content-mobile-item {
+    border: 2px solid rgb(0, 0, 0);
+    display: flex;
+    margin: 1vh;
+    border-radius: 14px;
+    height: 5vh;
+    background-color: #0000003a;
+}
+
+.settings-content-mobile-title {
+    margin-left: 1vh;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.settings-content-mobile-icon {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 1vh;
+}
+
+.settings-content-mobile-img {
+    margin: auto;
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    border: 2px solid red;
+}
+
+
+
+
 /* NavigationMobile.css */
 .icon-size {
-    font-size: 2vh;
+    font-size: 20px;
 }
 
 .label-size {
-    font-size: 1.5vh;
+    font-size: 15px;
 }
 
 
