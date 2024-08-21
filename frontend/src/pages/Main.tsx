@@ -40,7 +40,7 @@ const Main: React.FC = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get<DataItem[]>(
-        "https://chattappbuzz.onrender.com/api/data"
+        "https://testchat-repe.onrender.com/api/data"
       );
       setData(response.data);
     } catch (error) {

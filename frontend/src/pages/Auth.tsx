@@ -18,7 +18,7 @@ const AuthPage = () => {
         e.preventDefault();
         setLoading(true); // Set loading to true
         try {
-            const response = await axios.post('https://chattappbuzz.onrender.com/api/login', {
+            const response = await axios.post('https://testchat-repe.onrender.com/api/login', {
                 email,
                 password,
             });
@@ -39,7 +39,7 @@ const AuthPage = () => {
         e.preventDefault();
         setLoading(true); // Set loading to true
         try {
-            await axios.post('https://chattappbuzz.onrender.com/api/register', {
+            await axios.post('https://testchat-repe.onrender.com/api/register', {
                 email,
                 password,
             });

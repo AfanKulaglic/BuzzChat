@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, KeyboardEvent } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("https://chattappbuzz.onrender.com/");
+const socket = io("https://testchat-repe.onrender.com/");
 
 interface ChatMobileProps {
   friendUsername?: string;
@@ -16,6 +16,7 @@ interface Message {
   timestamp: string;
   toUser: string;
   _id: string;
+  seen?: boolean; // Add this line
 }
 
 interface DataItem {
@@ -38,7 +39,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
   const fetchData = async () => {
     try {
       const response = await axios.get<DataItem[]>(
-        "https://chattappbuzz.onrender.com/api/data"
+        "https://testchat-repe.onrender.com/api/data"
       );
       const friend = response.data.find(
         (item) => item.nickname === friendUsername
@@ -49,6 +50,14 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
 
       setFriendData(friend || null);
       setUserData(user || null);
+
+      // Mark messages as seen when chat is opened
+      if (user && friend) {
+        await axios.patch(
+          `https://testchat-repe.onrender.com/api/data/${friend._id}/markAsSeen`,
+          { user: userUsername }
+        );
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -57,7 +66,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
   const sendMessage = async () => {
     if (isSending.current || !friendData || !userData || !inputValue.trim()) return;
     isSending.current = true;
-  
+
     try {
       const messageForFriend: Message = {
         user: userUsername,
@@ -65,26 +74,28 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
         timestamp: new Date().toISOString(),
         toUser: friendUsername || "",
         _id: new Date().toISOString(), // Unique identifier for the message
+        seen: false, // Initially not seen
       };
-  
+
       const messageForUser: Message = {
         user: userUsername,
         content: inputValue,
         timestamp: new Date().toISOString(),
-        toUser: friendUsername || "ghost",
+        toUser: userUsername, // This should be userUsername as we are sending message to self
         _id: new Date().toISOString(), // Unique identifier for the message
+        seen: false, // Initially not seen
       };
-  
+
       // Send message to the backend for both friend and user
       await axios.patch(
-        `https://chattappbuzz.onrender.com/api/data/${friendData._id}/messages`,
+        `https://testchat-repe.onrender.com/api/data/${friendData._id}/messages`,
         messageForFriend
       );
       await axios.patch(
-        `https://chattappbuzz.onrender.com/api/data/${userData._id}/messages`,
+        `https://testchat-repe.onrender.com/api/data/${userData._id}/messages`,
         messageForUser
       );
-  
+
       // Update local state to reflect the change immediately
       setFriendData((prev) => {
         if (prev) {
@@ -100,7 +111,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
         }
         return prev;
       });
-  
+
       setUserData((prev) => {
         if (prev) {
           const messageExists = prev.messages.some(
@@ -116,8 +127,6 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
         return prev;
       });
 
-      
-  
       // Clear the input field after sending the message
       setInputValue("");
     } catch (error) {
@@ -126,7 +135,6 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
       isSending.current = false;
     }
   };
-  
 
   useEffect(() => {
     fetchData();
@@ -170,16 +178,15 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
     };
   }, [friendUsername, friendData, userUsername, userData]);
 
+  // Filter messages for both friend and user
   const filteredMessages = [
     ...(userData?.messages.filter(
       (message) =>
         (message.user === userUsername && message.toUser === friendUsername) ||
-        (message.user === friendUsername && message.toUser === userUsername) ||
-        (message.user === friendUsername && message.toUser === friendUsername) ||
-        (message.user === userUsername && message.toUser === userUsername)
+        (message.user === friendUsername && message.toUser === userUsername)
     ) || [])
   ];
-  
+
   // Sort messages by timestamp
   const sortedMessages = filteredMessages.sort((a, b) =>
     new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
@@ -212,8 +219,9 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
       <div className="chatContainer">
         {sortedMessages.map((message) => {
           // Determine the sender's image
-          const senderData = message.user === userUsername ? userData : friendData;
-          const senderImage = senderData?.image || '';
+          const senderImage = message.user === userUsername
+            ? userData?.image
+            : friendImage || ''; // Use friendImage if sender is friend
 
           return (
             <div
@@ -222,7 +230,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
             >
               <div className="messageContent">
                 <img
-                  src={senderImage}
+                  src={senderImage || ''}
                   alt={`${message.user}'s avatar`}
                   className="messageAvatar"
                 />
@@ -230,6 +238,11 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
                   <p><strong>{message.user}:</strong> {message.content}</p>
                   <span>{new Date(message.timestamp).toLocaleTimeString()}</span>
                 </div>
+                {message.user === userUsername && ( // Show "seen" status only if the message was sent by the user
+                  <div className={`messageStatus ${message.seen ? 'seen' : 'notSeen'}`}>
+                    {message.seen ? '✓' : '⏳'}
+                  </div>
+                )}
               </div>
             </div>
           );

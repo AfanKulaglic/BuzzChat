@@ -534,6 +534,12 @@ body {
     margin-bottom: auto;
 }
 
+.home-content-mobile-item-section-blue {
+    background-color: #6559a2;
+    font-weight: bold;
+    color: white; /* Optional: Adjust text color for better contrast */
+  }
+
 .home-content-mobile-section {
     margin-left: 10px;
     display: flex;

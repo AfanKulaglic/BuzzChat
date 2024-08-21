@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 
-const socketUrl = "https://chattappbuzz.onrender.com/";
+const socketUrl = "https://testchat-repe.onrender.com/";
 const socket: Socket = io(socketUrl);
 
 interface Message {
@@ -11,6 +11,7 @@ interface Message {
   content: string;
   timestamp: Date;
   toUser: string;
+  seen?: boolean;
 }
 
 interface DataItem {
@@ -57,11 +58,13 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
     data.forEach((item) => {
       item.messages.forEach((message) => {
         const friend = message.user === userName ? message.toUser : message.user;
-        // Provjeri je li poruka od prijatelja s kojim se korisnik razgovarao
+
         if (message.user === userName || message.toUser === userName) {
+          const existingMessage = userMessages.get(friend);
+
           if (
-            !userMessages.has(friend) ||
-            new Date(userMessages.get(friend)!.message.timestamp) < new Date(message.timestamp)
+            !existingMessage ||
+            new Date(existingMessage.message.timestamp) < new Date(message.timestamp)
           ) {
             userMessages.set(friend, { message, item });
           }
@@ -73,11 +76,10 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
 
     const receiveMessageHandler = (message: Message) => {
       const friend = message.user === userName ? message.toUser : message.user;
-      // Provjeri je li nova poruka relevantna
       if (message.user === userName || message.toUser === userName) {
         setLastMessages((prevLastMessages) => {
           const updatedMessages = new Map(prevLastMessages);
-          const item = data.find(d => d.nickname === friend);
+          const item = data.find((d) => d.nickname === friend);
           if (item) {
             updatedMessages.set(friend, { message, item });
           }
@@ -94,27 +96,49 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
   }, [data, userName]);
 
   const handleUserClick = (item: DataItem, message: Message) => {
-    const chatUser = item.nickname === userName ? message.toUser : item.nickname;
+    const chatUser = message.user === userName ? message.toUser : message.user;
     console.log("Navigating to chat with:", chatUser);
     navigate(`/chat/${chatUser}`);
   };
 
   return (
     <div className="home-content-mobile-container">
-      {[...lastMessages.values()].map(({ message, item }) => {
-        // Logika za odlučivanje kada prikazati komponentu
-        const displayName = item.nickname === userName ? message.toUser : item.nickname;
-        return (
-          displayName !== userName && (
+      {[...lastMessages.values()]
+        .sort((a, b) => new Date(b.message.timestamp).getTime() - new Date(a.message.timestamp).getTime())
+        .map(({ message, item }) => {
+          let displayName;
+          let displayImage;
+          let containerClass = "home-content-mobile-item-section"; // Default class
+  
+          // Set displayName based on the message context
+          if (message.user === userName) {
+            displayName = message.toUser;  // Display the 'toUser' if current user is the sender
+          } else {
+            displayName = message.user;  // Otherwise, display the sender's name
+          }
+  
+          // Set displayImage: Choose image based on whether it's the sender or receiver
+          if (message.user === userName) {
+            displayImage = "path_to_default_image";  // Set a default image or user-specific image
+          } else {
+            displayImage = item.image;  // Use the receiver's image
+          }
+  
+          // Apply blue background if the message is not seen and the user matches the friend
+          if (message.seen === false && message.user === displayName) {
+            containerClass += " home-content-mobile-item-section-blue";  // Append class for blue background
+          }
+  
+          return (
             <div
               key={item._id}
-              className="home-content-mobile-item-section"
+              className={containerClass}
               onClick={() => handleUserClick(item, message)}
             >
               <img
-                src={item.image}
+                src={displayImage}
                 className="home-content-mobile-img"
-                alt={item.nickname}
+                alt={displayName}
               />
               <div className="home-content-mobile-section">
                 <h3 className="home-content-mobile-username">
@@ -123,14 +147,20 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
                 <p className="home-content-mobile-message">
                   {message.user === userName ? "You: " : ""}{message.content}
                 </p>
+                {message.user === userName && (
+                  <p className="home-content-mobile-seen">
+                    {message.seen ? "Seen" : "False"}
+                  </p>
+                )}
               </div>
               <p className="home-content-mobile-timestamp">
                 {getTimeDifference(new Date(message.timestamp))}
               </p>
             </div>
-          )
-        );
-      })}
+          );
+        })}
     </div>
   );
+  
+  
 };
