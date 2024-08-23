@@ -8,12 +8,12 @@ import { Modal, Box, Typography, Button } from "@mui/material";
 import { useSettingsLogic } from "../../Hooks/useSettingsLogic";
 
 // Define props interface
-interface SettingsContentMobileProps {
+interface SettingsContentDesktopProps {
   userImage: string;
   userId: string;
 }
 
-export const SettingsContentMobile: React.FC<SettingsContentMobileProps> = ({ userImage, userId }) => {
+export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ userImage, userId }) => {
   const {
     image,
     openPrivacy,
@@ -30,7 +30,7 @@ export const SettingsContentMobile: React.FC<SettingsContentMobileProps> = ({ us
   } = useSettingsLogic(userImage, userId);
 
   return (
-    <div className="settings-content-mobile-container">
+    <div className="settings-content-mobile-container settings-content-desktop-container">
       <div className="settings-content-mobile-image-container">
         <img
           src={image}

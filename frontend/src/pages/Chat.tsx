@@ -6,6 +6,7 @@ import { RootState } from '../store/store'; // Adjust the path as needed
 import { ChatMobile } from '../components/Mobile/ChatMobile';
 import { ChatDesktop } from '../components/Desktop/ChatDesktop';
 import Loading from './Loading';
+import Main from './Main';
 
 interface DataItem {
     _id: string;
@@ -30,7 +31,7 @@ const Chat: React.FC = () => {
     // Fetch data from the server and find the matching friend
     const fetchData = async () => {
         try {
-            const response = await axios.get<DataItem[]>('https://testchat-repe.onrender.com/api/data');
+            const response = await axios.get<DataItem[]>('https://buzzchat-1lgf.onrender.com/api/data');
             const data = response.data;
 
             // Find the friend with the matching nickname
@@ -81,7 +82,14 @@ const Chat: React.FC = () => {
                     userUsername={userData.nickname}
                 />
             ) : (
-                <ChatDesktop />
+                <>
+                    <Main />
+                    <ChatDesktop
+                        friendUsername={friendData ? friendData.nickname : undefined}
+                        friendImage={friendData ? friendData.image : undefined}
+                        userUsername={userData.nickname}
+                    />
+                </>
             )}
         </div>
     );

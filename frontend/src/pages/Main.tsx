@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import AppBarMobile from "../components/Mobile/Main/AppBarMobile";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/userSlice"; // Adjust the path as necessary
 import { ExploreContentMobile } from "../components/Mobile/Main/ExploreContentMobile";
-import { AppBarDesktop } from "../components/Desktop/Main/AppBarDesktop";
-import { MainContentDesktop } from "../components/Desktop/Main/MainContentDesktop";
+import AppBarDesktop from "../components/Desktop/Main/AppBarDesktop";
 import Loading from "./Loading";
 import NavigationMobile from "../components/Mobile/Main/NavigationMobile";
 import { HomeContentMobile } from "../components/Mobile/Main/HomeContentMobile";
 import { SettingsContentMobile } from "../components/Mobile/Main/SettingsContentMobile";
+import AppBarMobile from "../components/Mobile/Main/AppBarMobile";
+import { RootState } from "../store/store";
+import NavigationDesktop from "../components/Desktop/Main/NavigationDesktop";
+import { NaHomeContentDesktop } from "../components/Desktop/Main/HomeContentDesktop";
+import { ExploreContentDesktop } from "../components/Desktop/Main/ExploreContentDesktop";
+import { SettingsContentDesktop } from "../components/Desktop/Main/SettingsContentDesktop";
 
 interface DataItem {
   _id: string;
@@ -30,17 +34,29 @@ interface Message {
 
 const Main: React.FC = () => {
   const location = useLocation();
-  const email = location.state?.email;
+  const navigate = useNavigate(); // Initialize navigate
+  const dispatch = useDispatch();
+  const storedUser = useSelector((state: RootState) => state.user);
+
   const [data, setData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // Loading state
-  const dispatch = useDispatch();
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
   const [activeTab, setActiveTab] = useState<number>(0); // New state for active tab
+
+  // Determine email source
+  const email = location.state?.email || storedUser.email;
+
+  // Redirect if email is not available
+  useEffect(() => {
+    if (!email) {
+      navigate("/"); // Redirect to home page
+    }
+  }, [email, navigate]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get<DataItem[]>(
-        "https://testchat-repe.onrender.com/api/data"
+        "https://buzzchat-1lgf.onrender.com/api/data"
       );
       setData(response.data);
     } catch (error) {
@@ -103,6 +119,7 @@ const Main: React.FC = () => {
               day: "numeric",
             }).format(new Date())}
             data={data}
+            onTabChange={setActiveTab} 
           />
           {activeTab === 0 && (
             <HomeContentMobile
@@ -110,6 +127,7 @@ const Main: React.FC = () => {
                 data.find((item) => item.email === email)?.nickname || "Guest"
               }
               data={data}
+              onTabChange={setActiveTab} 
             />
           )}
           {activeTab === 1 && (
@@ -125,14 +143,74 @@ const Main: React.FC = () => {
             />
           )}
           {activeTab === 2 && (
-            <SettingsContentMobile />
+            <SettingsContentMobile 
+              userImage={
+                data.find((item) => item.email === email)?.image ||
+                "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
+              }
+              userId={
+                data.find((item) => item.email === email)?._id ||
+                "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
+              }
+            />
           )}
           <NavigationMobile onTabChange={setActiveTab} activeTab={activeTab} />
         </div>
       ) : (
         <>
-          <AppBarDesktop />
-          <MainContentDesktop />
+          <AppBarDesktop 
+            userName={
+              data.find((item) => item.email === email)?.nickname || "Guest"
+            }
+            userImage={
+              data.find((item) => item.email === email)?.image ||
+              "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
+            }
+            currentDate={new Intl.DateTimeFormat("en-US", {
+              weekday: "long",
+              month: "long",
+              day: "numeric",
+            }).format(new Date())}
+            data={data}
+            onTabChange={setActiveTab} 
+          />
+          {activeTab === 0 && (
+            <NaHomeContentDesktop
+              userName={
+                data.find((item) => item.email === email)?.nickname || "Guest"
+              }
+              data={data}
+              onTabChange={setActiveTab} 
+            />
+          )}
+          {activeTab === 1 && (
+            <ExploreContentDesktop
+              userName={
+                data.find((item) => item.email === email)?.nickname || "Guest"
+              }
+              userImage={
+                data.find((item) => item.email === email)?.image ||
+                "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
+              }
+              data={data}
+            />
+          )}
+          {activeTab === 2 && (
+            <SettingsContentDesktop 
+              userImage={
+                data.find((item) => item.email === email)?.image ||
+                "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
+              }
+              userId={
+                data.find((item) => item.email === email)?._id ||
+                "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
+              }
+            />
+          )}
+          <div className="empty-conversation">
+            <p> <img src="/conversation.png" /> Your Messages <span>Send a message to start a chat</span></p>
+          </div>
+          <NavigationDesktop onTabChange={setActiveTab} activeTab={activeTab} />
         </>
       )}
     </div>

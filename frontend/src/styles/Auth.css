@@ -1,0 +1,123 @@
+.auth-page {
+    display: flex;
+    height: 100vh;
+    background-image: url('/backgroundLoading2.jpg');
+    background-color: red;
+    background-size: 100% 100%;
+
+    .auth-container {
+        width: 400px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #fff;
+        box-shadow: 0 0 30px #aaaaaa;
+    }
+
+    .auth-container-desktop {
+        height: 80vh;
+        background-color: #aaaaaa5b;
+        margin-left: 10vh;
+        width: 25vw;
+        display: flex;
+    }
+
+    .auth-toggle {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .auth-form-desktop {
+        width: 100%;
+        margin: auto;
+    }
+
+    .auth-form input:not([type="checkbox"]) {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #0000006c;
+        font-size: 20px;
+        border-radius: 25px;
+    }
+
+    .auth-form h2 {
+        font-size: 30px;
+        color: black;
+    }
+
+    .auth-form-desktop h2 {
+        margin-bottom: 5vh;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+    }
+
+
+    .auth-form button {
+        padding: 15px;
+        border: none;
+        border-radius: 25px;
+        border: 1px solid white;
+        background-color: #6559a2;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    
+    
+    .auth-form button:hover {
+        background-color: #2b254b;
+        border: 1px solid transparent;
+        transform: scale(1.05);
+    }
+
+    .auth-error {
+        color: red;
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    .auth-toggle-text {
+        margin-top: 15px;
+        text-align: start;
+        font-size: 16px;
+        color: black;
+    }
+
+    .auth-link {
+        color: #2b254b;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .auth-link:hover {
+        text-decoration: underline;
+    }
+
+    .auth-form .checkbox {
+        display: flex;
+        color: black;
+        margin-bottom: 20px;
+        margin-left: 5px;
+    }
+
+    .checkbox span {
+        display: flex;
+        font-size: 15px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .checkbox input {
+        width: 17px; 
+        height: 17px
+    }
+
+}

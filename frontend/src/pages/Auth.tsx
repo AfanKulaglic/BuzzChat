@@ -1,9 +1,9 @@
 import { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import AuthMobile from '../components/Mobile/AuthMobile';
-import AuthDesktop from '../components/Desktop/AuthDesktop';
 import { useNavigate } from 'react-router-dom';
 import Loading from './Loading';
+import AuthDesktop from '../components/Desktop/AuthDesktop';
 
 const AuthPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -18,7 +18,7 @@ const AuthPage = () => {
         e.preventDefault();
         setLoading(true); // Set loading to true
         try {
-            const response = await axios.post('https://testchat-repe.onrender.com/api/login', {
+            const response = await axios.post('https://buzzchat-1lgf.onrender.com/api/login', {
                 email,
                 password,
             });
@@ -39,7 +39,7 @@ const AuthPage = () => {
         e.preventDefault();
         setLoading(true); // Set loading to true
         try {
-            await axios.post('https://testchat-repe.onrender.com/api/register', {
+            await axios.post('https://buzzchat-1lgf.onrender.com/api/register', {
                 email,
                 password,
             });
@@ -84,7 +84,17 @@ const AuthPage = () => {
                     handleRegister={handleRegister}
                 />
             ) : (
-                <AuthDesktop />
+                <AuthDesktop
+                    email={email}
+                    password={password}
+                    error={error}
+                    isLogin={isLogin}
+                    setEmail={setEmail}
+                    setPassword={setPassword}
+                    setIsLogin={setIsLogin}
+                    handleLogin={handleLogin}
+                    handleRegister={handleRegister}
+                />
             )}
         </div>
     );

@@ -1,0 +1,142 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #2b2b2b;
+}
+
+.chat-container-desktop {
+    position: fixed;
+    margin-left: 39vw;
+    width: 61vw;
+    border-left: 1px solid var(--secondary-color);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+    color: white;
+}
+
+.back-arrow {
+    margin-right: 15px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.avatarPlaceholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    margin-right: 8px;
+}
+
+.headerTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.messageUserInfo {
+    display: flex;
+}
+
+.messageAvatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.messageUser {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 8px;
+}
+
+.messageText {
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.messageDescription {
+    display: flex;
+}
+
+.messageTimestamp {
+    margin: auto;
+    margin-right: 0px;
+}
+
+.chatContainer {
+    flex: 1;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    padding: 7px;
+    overflow-y: scroll;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+}
+
+.sendButton {
+    padding: 8px;
+    margin-left: 8px;
+    background-color: #6559a2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-weight: 500;
+    display: flex;
+}
+
+.message {
+    padding: 5px;
+    margin: 8px;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* Default background color for messages */
+}
+
+.userMessage {
+    background-color: #6559a2; /* Background color for user's own messages */
+    color: white; /* Text color for better readability */
+    margin-left: auto;
+    border-radius: 15px;
+    border-bottom-right-radius: 0px;
+    width: 80vw;
+}
+
+.friendMessage {
+    background-color: #2b2b2b; /* Background color for user's own messages */
+    color: white; /* Text color for better readability */
+    margin-right: auto;
+    border-radius: 15px;
+    border-bottom-left-radius: 0px;
+    width: 80vw;
+}
+
+.message-desktop {
+    width: 20vw;
+}

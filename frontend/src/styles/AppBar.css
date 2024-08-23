@@ -1,0 +1,97 @@
+.app-bar-mobile-container {
+    background-color: #2b2b2b;
+    height: 150px;
+    top: 0;
+    width: 100vw;
+    position: fixed;
+}
+
+.app-bar-mobile-container-desktop {
+    background-color: #2b2b2b;
+    height: 150px;
+    top: 0;
+    width: 35vw;
+    margin-left: 7vh;
+    position: fixed;
+}
+
+.app-bar-mobile-top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.app-bar-mobile-left-section {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+.app-bar-mobile-user-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    color: white;
+}
+
+.app-bar-mobile-user-name {
+    font-weight: bold;
+    color: white;
+    font-size: 19px;
+}
+
+.app-bar-mobile-right-section {
+    font-size: 14px;
+}
+
+.app-bar-mobile-date-display {
+    color: white;
+}
+
+.app-bar-mobile-search-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+#app-bar-mobile-search-input {
+    width: 85%;
+    height: 20px;
+    padding: 10px;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.app-bar-mobile-search-results {
+    margin-top: 10px;
+    background-color: #2b2b2b;
+}
+
+.app-bar-mobile-search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.app-bar-mobile-search-result-name {
+    color: white;
+    font-size: 17px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.app-bar-mobile-nickname-icon {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 2px solid red;
+}

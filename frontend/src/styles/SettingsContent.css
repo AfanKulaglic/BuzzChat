@@ -1,0 +1,97 @@
+.settings-content-mobile-container {
+    margin-top: 149px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.settings-content-desktop-container {
+    margin-top: 149px;
+    width: 35vw;
+    margin-left: 7vh;
+    position: fixed;
+}
+
+.settings-content-mobile-item {
+    border-top: 1px solid var(--secondary-color);
+    display: flex;
+    padding: 10px;
+    height: 50px;
+    overflow: scroll;
+}
+
+.settings-content-mobile-item-logout {
+    display: flex;
+    height: 50px;
+    padding: 10px;
+    background-color: #c20000;
+    color: white;
+}
+
+.settings-content-mobile-title {
+    margin-left: 10px;
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.settings-content-mobile-icon {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+}
+
+.settings-content-mobile-img {
+    margin: auto;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid red;
+}
+
+.settings-content-mobile-user-image {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    border-radius: 50%;
+    border: 2px solid #a11212;
+}
+
+.settings-content-mobile-span {
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.settings-content-mobile-image-container {
+    position: relative;
+    display: inline-block;
+    margin: auto;
+  }
+  
+.settings-content-mobile-edit-icon {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    background-color: white; /* Optional: to ensure the icon is visible on any background */
+    border-radius: 50%; /* Optional: for a rounded background */
+    padding: 3px; /* Optional: space around the icon */
+    cursor: pointer; /* Indicate it's clickable */
+    margin: auto;
+    border-radius: 50%;
+}
+
+#terms-of-service-modal,
+#terms-of-service-description {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}
+
+#privacy-policy-modal,
+#privacy-policy-description {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}

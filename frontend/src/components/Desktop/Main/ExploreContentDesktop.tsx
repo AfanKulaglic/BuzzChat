@@ -18,13 +18,13 @@ interface Message {
   toUser: string;
 }
 
-interface ExploreContentMobileProps {
+interface ExploreContentDesktopProps {
   userName: string;
   userImage: string; // Path to user's image
   data: DataItem[]; // Array of data items
 }
 
-export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
+export const ExploreContentDesktop: React.FC<ExploreContentDesktopProps> = ({
   userName,
   userImage,
   data,
@@ -41,10 +41,10 @@ export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
   const userMessageData = data.filter((item) => item.nickname === userName);
 
   return (
-    <div className="explore-content-mobile-container">
+    <div className="explore-content-mobile-container explore-content-desktop-container">
       <Grid container spacing={2}>
         {/* First Row: User Info */}
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <div className="explore-content-mobile-user-section">
             <img
               src={userImage}
@@ -62,7 +62,7 @@ export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
 
         {/* Data Items Rows */}
         {filteredData.map((item) => (
-          <Grid item xs={6} key={item._id}>
+          <Grid item xs={12} key={item._id}>
             <div
               className="explore-content-mobile-item"
               onClick={() => handleItemClick(item.nickname)}

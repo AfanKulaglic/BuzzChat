@@ -2,13 +2,13 @@ import React from "react";
 import { useHomeContentLogic, DataItem } from "../../Hooks/useHomeContentLogic";
 import { useNavigate } from "react-router-dom";
 
-interface HomeContentMobileProps {
+interface NaHomeContentDesktopProps {
   userName: string;
   data: DataItem[];
   onTabChange: (newValue: number) => void; // Dodaj funkciju za promenu taba u props
 }
 
-export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
+export const NaHomeContentDesktop: React.FC<NaHomeContentDesktopProps> = ({
   userName,
   data,
   onTabChange, // Primaš `onTabChange` kao props
@@ -25,7 +25,7 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
   };
 
   return (
-    <div className="home-content-mobile-container">
+    <div className="home-content-mobile-container home-content-desktop-container">
       <div 
         className="home-content-mobile-item-section"
         onClick={() => navigate('/aiBot')} // Navigate to /aiBot

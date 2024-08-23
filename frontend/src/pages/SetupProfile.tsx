@@ -15,8 +15,13 @@ const SetupProfile: React.FC = () => {
   const navigate = useNavigate();
 
   const slides = [
-    { title: 'Slide 1', content: 'Content for the first slide' },
-    { title: 'Slide 2', content: 'Content for the second slide' },
+    {
+       title: 'Manage Your Chats and Customize Your Profile',
+       content: 'In the "Home" tab, you can find all your previous messages and a list of users you`ve already chatted with. This allows you to quickly access ongoing and past conversations.The chat is real-time, meaning you can see when a message was sent and if it has been read (seen feature). There are also timestamps for each message.In the "Settings" tab, you can easily change your username, profile picture, and manage all other settings, including the option to log out.' 
+    },
+    {  title: 'How to Use the Chat Application',
+       content: 'In the "Explore" tab, you can discover the most active users who have sent the most messages. These users are highlighted as the most valued members of the community.Browse their profiles and start a conversation if you`re interested in connecting with them or learning more.' 
+    },
     { title: 'Setup Profile', content: '' }
   ];
 
@@ -34,10 +39,10 @@ const SetupProfile: React.FC = () => {
     }
 
     try {
-      await axios.post('https://testchat-repe.onrender.com/api/data', {
+      await axios.post('https://buzzchat-1lgf.onrender.com/api/data', {
         nickname,
         image: imageUrl,
-        email, // Including email in the request
+        email,
       });
       setError('');
       navigate('/main', { state: { email } });
@@ -70,6 +75,25 @@ const SetupProfile: React.FC = () => {
     };
   }, []);
 
+  // Dodavanje defaultne slike ako korisnik nije izabrao sliku
+  useEffect(() => {
+    if (!imageUrl) {
+      // Simulacija postavljanja defaultne slike
+      const defaultImageUrl = '/defaultProfile.png';
+      fetch(defaultImageUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const defaultFile = new File([blob], 'defaultProfile.png', { type: 'image/png' });
+          const defaultEvent = {
+            target: {
+              files: [defaultFile],
+            },
+          } as unknown as React.ChangeEvent<HTMLInputElement>;
+          handleImageChange(defaultEvent); // Simulira se da je korisnik izabrao defaultnu sliku
+        });
+    }
+  }, [imageUrl]);
+
   return isMobile ? (
     <SetupProfileMobile
       nickname={nickname}
@@ -84,7 +108,18 @@ const SetupProfile: React.FC = () => {
       setNickname={setNickname}
     />
   ) : (
-    <SetupProfileDesktop />
+    <SetupProfileDesktop 
+      nickname={nickname}
+      imageUrl={imageUrl}
+      error={error}
+      slides={slides}
+      currentSlide={currentSlide}
+      handleImageChange={handleImageChange}
+      handleSubmit={handleSubmit}
+      nextSlide={nextSlide}
+      prevSlide={prevSlide}
+      setNickname={setNickname}
+    />
   );
 };
 

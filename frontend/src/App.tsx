@@ -11,6 +11,14 @@ import Chat from './pages/Chat';
 import AdminDashboard from './pages/AdminDashboard';
 import './index.css';
 import StartLoading from './pages/StartLoading';
+import AiBot from './pages/AiBot';
+import './styles/Auth.css'
+import './styles/SetupProfile.css'
+import './styles/AppBar.css'
+import './styles/HomeContent.css'
+import './styles/ExploreContent.css'
+import './styles/SettingsContent.css'
+import './styles/ChatMobile.css'
 
 function App() {
     const user = useSelector((state: RootState) => state.user);
@@ -45,6 +53,7 @@ function App() {
             <Route path="/main" element={<Main />} />
             <Route path="/chat/:nickname" element={<Chat />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/aiBot" element={<AiBot />} />
         </Routes>
     );
 }

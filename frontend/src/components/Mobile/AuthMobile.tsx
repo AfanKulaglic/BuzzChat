@@ -52,6 +52,7 @@ const MobileAuthForm: React.FC<MobileAuthFormProps> = ({
                         type={showPassword ? "text" : "password"}
                         placeholder="Password"
                         value={password}
+                        className='auth-form-input'
                         onChange={(e) => setPassword(e.target.value)}
                         autoComplete="current-password"
                     />
@@ -71,7 +72,7 @@ const MobileAuthForm: React.FC<MobileAuthFormProps> = ({
                 </form>
             ) : (
                 <form onSubmit={handleRegisterSubmit} className='auth-form'>
-                    <h2>Register</h2>
+                    <h2>Registration</h2>
                     <input
                         type="email"
                         placeholder="Email"
