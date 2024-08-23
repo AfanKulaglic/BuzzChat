@@ -1,6 +1,5 @@
 import React, { KeyboardEvent, useRef, useEffect, useState } from "react";
 import { useChatLogic } from "../Hooks/useChatLogic";
-import { useNavigate } from "react-router-dom";
 import SendIcon from '@mui/icons-material/Send';
 
 interface ChatDesktopProps {
@@ -18,8 +17,6 @@ export const ChatDesktop: React.FC<ChatDesktopProps> = ({
     friendUsername,
     userUsername
   );
-
-  const navigate = useNavigate();
   
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(true);
