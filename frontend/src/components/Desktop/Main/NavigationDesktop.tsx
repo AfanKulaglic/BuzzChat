@@ -23,10 +23,10 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
     <Box
       sx={{
         position: 'fixed',
-        borderRight:'1px solid white',
+        borderRight:'0.1vh solid white',
         left: 0,
         height: '100%', // Make the navigation take up the full height of the screen
-        width: '7vh', // Width of the vertical navigation
+        width: '4vw', // Width of the vertical navigation
         display: 'flex',
         flexDirection: 'column', // Ensure the items are arranged vertically
         zIndex: 1000,

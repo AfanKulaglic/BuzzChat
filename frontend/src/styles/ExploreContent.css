@@ -5,9 +5,9 @@
 }
 
 .explore-content-desktop-container {
-    margin-top: 149px;
-    width: 33vw;
-    margin-left: 7vh;
+    margin-top: 153px;
+    width: 34vw;
+    margin-left: 4vw;
     position: fixed;
     max-height: 80vh; /* Postavi maksimalnu visinu */
     overflow-y: auto;

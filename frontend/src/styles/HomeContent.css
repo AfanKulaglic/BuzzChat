@@ -7,9 +7,9 @@
 .home-content-desktop-container {
     margin-top: 149px;
     width: 35vw;
-    margin-left: 7vh;
+    margin-left: 4vw;
     position: fixed;
-    max-height: 80vh; /* Postavi maksimalnu visinu */
+    height: 90vh; /* Postavi maksimalnu visinu */
     overflow-y: auto;
 }
 
@@ -18,6 +18,12 @@
     width: 70vw;
     margin: auto;
     height: 600px;
+}
+
+.home-content-desktop-no-messages {
+    display: flex;
+    width: 18vw;
+    margin: auto;
 }
 
 .home-content-mobile-plus-button {

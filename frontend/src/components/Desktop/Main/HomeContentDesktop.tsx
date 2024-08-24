@@ -43,7 +43,7 @@ export const NaHomeContentDesktop: React.FC<NaHomeContentDesktopProps> = ({
       </div>
       
       {[...lastMessages.values()].length === 0 ? (
-        <div className="home-content-mobile-no-messages">
+        <div className="home-content-mobile-no-messages home-content-desktop-no-messages">
           <p className="home-content-mobile-no-messages-text">
             You don't have any messages yet. Find friends to chat with!<br/>
             <button
