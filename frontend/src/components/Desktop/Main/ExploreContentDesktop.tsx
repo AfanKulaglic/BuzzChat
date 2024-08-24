@@ -20,8 +20,8 @@ interface Message {
 
 interface ExploreContentDesktopProps {
   userName: string;
-  userImage: string; // Path to user's image
-  data: DataItem[]; // Array of data items
+  userImage: string;
+  data: DataItem[];
 }
 
 export const ExploreContentDesktop: React.FC<ExploreContentDesktopProps> = ({
@@ -31,7 +31,6 @@ export const ExploreContentDesktop: React.FC<ExploreContentDesktopProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  // Filter out the current user's nickname from the data
   const filteredData = data.filter((item) => item.nickname !== userName);
 
   const handleItemClick = (nickname: string) => {
@@ -52,8 +51,16 @@ export const ExploreContentDesktop: React.FC<ExploreContentDesktopProps> = ({
               className="explore-content-mobile-image"
             />
             <div>
-              <h3 className="explore-content-mobile-username" style={{textShadow:'none'}}>{userName}</h3>
-              <p className="explore-content-mobile-message-count" style={{textShadow:'none'}}>
+              <h3
+                className="explore-content-mobile-username"
+                style={{ textShadow: "none" }}
+              >
+                {userName}
+              </h3>
+              <p
+                className="explore-content-mobile-message-count"
+                style={{ textShadow: "none" }}
+              >
                 {userMessageData.map((item) => item.messages.length)}🫂
               </p>
             </div>
@@ -66,7 +73,10 @@ export const ExploreContentDesktop: React.FC<ExploreContentDesktopProps> = ({
             <div
               className="explore-content-mobile-item"
               onClick={() => handleItemClick(item.nickname)}
-              style={{ backgroundImage: `url(${item.image})`,cursor: "pointer" }}
+              style={{
+                backgroundImage: `url(${item.image})`,
+                cursor: "pointer",
+              }}
             >
               <img
                 src={item.image}

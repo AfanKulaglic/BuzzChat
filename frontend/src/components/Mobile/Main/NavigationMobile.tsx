@@ -15,6 +15,7 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
   const [value, setValue] = React.useState(activeTab);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event)
     setValue(newValue);
     onTabChange(newValue);
   };
@@ -47,12 +48,12 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
             },
             '&.Mui-selected': {
               backgroundColor: 'transparent',
-              paddingTop: '6px', // reset padding to prevent enlargement
+              paddingTop: '6px',
               '& .MuiBottomNavigationAction-iconOnly': {
                 padding: '0px',
               },
               '& .MuiBottomNavigationAction-label': {
-                fontSize: '15px', // reset font size
+                fontSize: '15px', 
               },
             },
           }}
@@ -67,12 +68,12 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
             },
             '&.Mui-selected': {
               backgroundColor: 'transparent',
-              paddingTop: '6px', // reset padding to prevent enlargement
+              paddingTop: '6px', 
               '& .MuiBottomNavigationAction-iconOnly': {
                 padding: '0px',
               },
               '& .MuiBottomNavigationAction-label': {
-                fontSize: '15px', // reset font size
+                fontSize: '15px', 
               },
             },
           }}
@@ -87,12 +88,12 @@ export default function NavigationMobile({ onTabChange, activeTab }: NavigationM
             },
             '&.Mui-selected': {
               backgroundColor: 'transparent',
-              paddingTop: '6px', // reset padding to prevent enlargement
+              paddingTop: '6px', 
               '& .MuiBottomNavigationAction-iconOnly': {
                 padding: '0px',
               },
               '& .MuiBottomNavigationAction-label': {
-                fontSize: '15px', // reset font size
+                fontSize: '15px',
               },
             },
           }}

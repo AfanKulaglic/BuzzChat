@@ -2,7 +2,7 @@ import React, { KeyboardEvent, useRef, useEffect, useState } from "react";
 import { useChatLogic } from "../Hooks/useChatLogic";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
 
 interface ChatMobileProps {
   friendUsername?: string;
@@ -21,7 +21,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
   );
 
   const navigate = useNavigate();
-  
+
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(true);
 
@@ -56,7 +56,9 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
     const chatContainer = chatContainerRef.current;
     if (chatContainer) {
       // Check if the user is scrolled to the bottom
-      const atBottom = chatContainer.scrollHeight - chatContainer.scrollTop <= chatContainer.clientHeight + 1;
+      const atBottom =
+        chatContainer.scrollHeight - chatContainer.scrollTop <=
+        chatContainer.clientHeight + 1;
       setIsScrolledToBottom(atBottom);
     }
   };
@@ -85,9 +87,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
         ) : (
           <div className="avatarPlaceholder" />
         )}
-        <h1 className="headerTitle">
-          {friendUsername || "Nepoznat prijatelj"}
-        </h1>
+        <h1 className="headerTitle">{friendUsername || "Unknown Friend"}</h1>
       </header>
       <div className="chatContainer" ref={chatContainerRef}>
         {sortedMessages.map((message) => {
@@ -134,7 +134,7 @@ export const ChatMobile: React.FC<ChatMobileProps> = ({
       <footer className="footer">
         <input
           type="text"
-          placeholder="Unesite poruku..."
+          placeholder="Enter a message..."
           className="input"
           value={inputValue}
           onChange={handleInputChange}

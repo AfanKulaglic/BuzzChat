@@ -20,8 +20,8 @@ interface Message {
 
 interface ExploreContentMobileProps {
   userName: string;
-  userImage: string; // Path to user's image
-  data: DataItem[]; // Array of data items
+  userImage: string;
+  data: DataItem[];
 }
 
 export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
@@ -31,7 +31,6 @@ export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  // Filter out the current user's nickname from the data
   const filteredData = data.filter((item) => item.nickname !== userName);
 
   const handleItemClick = (nickname: string) => {
@@ -43,7 +42,6 @@ export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
   return (
     <div className="explore-content-mobile-container">
       <Grid container spacing={2}>
-        {/* First Row: User Info */}
         <Grid item xs={6}>
           <div className="explore-content-mobile-user-section">
             <img
@@ -52,21 +50,31 @@ export const ExploreContentMobile: React.FC<ExploreContentMobileProps> = ({
               className="explore-content-mobile-image"
             />
             <div>
-              <h3 className="explore-content-mobile-username" style={{textShadow:'none'}}>{userName}</h3>
-              <p className="explore-content-mobile-message-count" style={{textShadow:'none'}}>
+              <h3
+                className="explore-content-mobile-username"
+                style={{ textShadow: "none" }}
+              >
+                {userName}
+              </h3>
+              <p
+                className="explore-content-mobile-message-count"
+                style={{ textShadow: "none" }}
+              >
                 {userMessageData.map((item) => item.messages.length)}🫂
               </p>
             </div>
           </div>
         </Grid>
 
-        {/* Data Items Rows */}
         {filteredData.map((item) => (
           <Grid item xs={6} key={item._id}>
             <div
               className="explore-content-mobile-item"
               onClick={() => handleItemClick(item.nickname)}
-              style={{ backgroundImage: `url(${item.image})`,cursor: "pointer" }}
+              style={{
+                backgroundImage: `url(${item.image})`,
+                cursor: "pointer",
+              }}
             >
               <img
                 src={item.image}

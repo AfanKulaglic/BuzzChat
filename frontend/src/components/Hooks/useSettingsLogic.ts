@@ -39,7 +39,7 @@ export const useSettingsLogic = (userImage: string, userId: string) => {
       formData.append('image', file);
 
       try {
-        const response = await axios.patch(`https://buzzchat-1lgf.onrender.com/api/data/${userId}/updateImage`, formData, {
+        const response = await axios.patch(`https://buzzchat-beo9.onrender.com/api/data/${userId}/updateImage`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

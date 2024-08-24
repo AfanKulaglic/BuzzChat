@@ -15,6 +15,7 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
   const [value, setValue] = React.useState(activeTab);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event)
     setValue(newValue);
     onTabChange(newValue);
   };
@@ -25,10 +26,10 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
         position: 'fixed',
         borderRight:'0.1vh solid white',
         left: 0,
-        height: '100%', // Make the navigation take up the full height of the screen
-        width: '4vw', // Width of the vertical navigation
+        height: '100%', 
+        width: '4vw', 
         display: 'flex',
-        flexDirection: 'column', // Ensure the items are arranged vertically
+        flexDirection: 'column', 
         zIndex: 1000,
         background: '#2b2b2b',
       }}
@@ -40,10 +41,10 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
         sx={{
           background: 'transparent',
           width: '100%',
-          height: '100%', // Ensure navigation covers the full height of the container
+          height: '100%', 
           display: 'flex',
-          flexDirection: 'column', // Make items stack vertically
-          alignItems: 'center', // Center icons and labels
+          flexDirection: 'column', 
+          alignItems: 'center', 
         }}
       >
         <BottomNavigationAction
@@ -57,8 +58,8 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
             '&.Mui-selected': {
               backgroundColor: 'transparent',
             },
-            minWidth: '0', // Prevent horizontal stretching
-            padding: '20px 0', // Vertical padding
+            minWidth: '0', 
+            padding: '20px 0', 
           }}
         />
         <BottomNavigationAction
@@ -72,8 +73,8 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
             '&.Mui-selected': {
               backgroundColor: 'transparent',
             },
-            minWidth: '0', // Prevent horizontal stretching
-            padding: '20px 0', // Vertical padding
+            minWidth: '0', 
+            padding: '20px 0', 
           }}
         />
         <BottomNavigationAction
@@ -87,8 +88,8 @@ export default function NavigationDesktop({ onTabChange, activeTab }: Navigation
             '&.Mui-selected': {
               backgroundColor: 'transparent',
             },
-            minWidth: '0', // Prevent horizontal stretching
-            padding: '20px 0', // Vertical padding
+            minWidth: '0', 
+            padding: '20px 0', 
           }}
         />
       </BottomNavigation>

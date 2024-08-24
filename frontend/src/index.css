@@ -1,11 +1,11 @@
 :root {
     --primary-color: white;
     --secondary-color: rgb(19, 19, 19);
-  }
-  
+}
+
 .dark-mode {
---primary-color: rgb(19, 19, 19);
---secondary-color: white;
+    --primary-color: rgb(19, 19, 19);
+    --secondary-color: white;
 }
 
 img {
@@ -16,23 +16,20 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    font-family: 'Roboto', sans-serif; /* Apply the Roboto font */
+    font-family: 'Roboto', sans-serif;
     background-color: var(--primary-color);
     color: var(--secondary-color);
 }
 
 
-  
-  
-
-  
-  .loading-container {
+.loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100vw;
 }
+
 
 
 .empty-conversation {
@@ -66,10 +63,6 @@ body {
 
 
 
-
-
-
-/* NavigationMobile.css */
 .icon-size {
     font-size: 20px;
 }
@@ -79,33 +72,25 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
 .start-loading-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    height: 100vh;
     width: 100vw;
 }
 
 .loading-logo {
     margin-top: 10vh;
     max-width: 15vh;
-    object-fit: contain; /* Maintain aspect ratio */
+    object-fit: contain;
 }
 
 .loading-text {
-    margin-top: auto; /* Pushes the text to the bottom */
+    margin-top: auto;
     text-align: center;
     color: rgb(34, 0, 128);
-    padding-bottom: 20px; /* Adds some space at the bottom */
-    font-size: 2vh; /* Adjust font size as needed */
+    padding-bottom: 20px;
+    font-size: 2vh;
 }

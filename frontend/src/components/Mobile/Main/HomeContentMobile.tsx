@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 interface HomeContentMobileProps {
   userName: string;
   data: DataItem[];
-  onTabChange: (newValue: number) => void; // Dodaj funkciju za promenu taba u props
+  onTabChange: (newValue: number) => void;
 }
 
 export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
   userName,
   data,
-  onTabChange, // Primaš `onTabChange` kao props
+  onTabChange,
 }) => {
   const { lastMessages, handleUserClick, getTimeDifference } = useHomeContentLogic({
     userName,
@@ -21,14 +21,14 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
   const navigate = useNavigate();
 
   const handlePlusButtonClick = () => {
-    onTabChange(1); // Poziva `onTabChange` i postavlja tab na 1
+    onTabChange(1);
   };
 
   return (
     <div className="home-content-mobile-container">
       <div 
         className="home-content-mobile-item-section"
-        onClick={() => navigate('/aiBot')} // Navigate to /aiBot
+        onClick={() => navigate('/aiBot')} 
       >
         <img
           src='/bot.png'
@@ -59,7 +59,7 @@ export const HomeContentMobile: React.FC<HomeContentMobileProps> = ({
           .sort((a, b) => new Date(b.message.timestamp).getTime() - new Date(a.message.timestamp).getTime())
           .map(({ message, item }) => {
             const displayName = message.user === userName ? message.toUser : message.user;
-            let displayImage = "/defaultProfile.png";  // Default image
+            let displayImage = "/defaultProfile.png";
 
             const matchedUser = data.find((d) => d.nickname === displayName);
             if (matchedUser) {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../store/userSlice"; // Adjust the path as necessary
+import { setUser } from "../store/userSlice";
 import { ExploreContentMobile } from "../components/Mobile/Main/ExploreContentMobile";
 import AppBarDesktop from "../components/Desktop/Main/AppBarDesktop";
 import Loading from "./Loading";
@@ -34,35 +34,33 @@ interface Message {
 
 const Main: React.FC = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const storedUser = useSelector((state: RootState) => state.user);
 
   const [data, setData] = useState<DataItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // Loading state
+  const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
-  const [activeTab, setActiveTab] = useState<number>(0); // New state for active tab
+  const [activeTab, setActiveTab] = useState<number>(0);
 
-  // Determine email source
   const email = location.state?.email || storedUser.email;
 
-  // Redirect if email is not available
   useEffect(() => {
     if (!email) {
-      navigate("/"); // Redirect to home page
+      navigate("/");
     }
   }, [email, navigate]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get<DataItem[]>(
-        "https://buzzchat-1lgf.onrender.com/api/data"
+        "https://buzzchat-beo9.onrender.com/api/data"
       );
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false); // Set loading to false once data fetching is complete
+      setLoading(false);
     }
   };
 
@@ -83,11 +81,10 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     if (activeTab === 0) {
-      fetchData(); // Fetch data again when the HomeContentMobile tab is activated
+      fetchData();
     }
   }, [activeTab]);
 
-  // Handle window resize to update screen size
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -104,7 +101,7 @@ const Main: React.FC = () => {
   return (
     <div>
       {isMobile ? (
-        <div style={{ height: "100vh", border: "2px solid red" }}>
+        <div style={{ height: "100vh" }}>
           <AppBarMobile
             userName={
               data.find((item) => item.email === email)?.nickname || "Guest"
@@ -119,7 +116,7 @@ const Main: React.FC = () => {
               day: "numeric",
             }).format(new Date())}
             data={data}
-            onTabChange={setActiveTab} 
+            onTabChange={setActiveTab}
           />
           {activeTab === 0 && (
             <HomeContentMobile
@@ -127,7 +124,7 @@ const Main: React.FC = () => {
                 data.find((item) => item.email === email)?.nickname || "Guest"
               }
               data={data}
-              onTabChange={setActiveTab} 
+              onTabChange={setActiveTab}
             />
           )}
           {activeTab === 1 && (
@@ -143,7 +140,7 @@ const Main: React.FC = () => {
             />
           )}
           {activeTab === 2 && (
-            <SettingsContentMobile 
+            <SettingsContentMobile
               userImage={
                 data.find((item) => item.email === email)?.image ||
                 "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
@@ -158,7 +155,7 @@ const Main: React.FC = () => {
         </div>
       ) : (
         <>
-          <AppBarDesktop 
+          <AppBarDesktop
             userName={
               data.find((item) => item.email === email)?.nickname || "Guest"
             }
@@ -172,7 +169,7 @@ const Main: React.FC = () => {
               day: "numeric",
             }).format(new Date())}
             data={data}
-            onTabChange={setActiveTab} 
+            onTabChange={setActiveTab}
           />
           {activeTab === 0 && (
             <NaHomeContentDesktop
@@ -180,7 +177,7 @@ const Main: React.FC = () => {
                 data.find((item) => item.email === email)?.nickname || "Guest"
               }
               data={data}
-              onTabChange={setActiveTab} 
+              onTabChange={setActiveTab}
             />
           )}
           {activeTab === 1 && (
@@ -196,7 +193,7 @@ const Main: React.FC = () => {
             />
           )}
           {activeTab === 2 && (
-            <SettingsContentDesktop 
+            <SettingsContentDesktop
               userImage={
                 data.find((item) => item.email === email)?.image ||
                 "https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_1280.jpg"
@@ -208,7 +205,11 @@ const Main: React.FC = () => {
             />
           )}
           <div className="empty-conversation">
-            <p> <img src="/conversation.png" /> Your Messages <span>Send a message to start a chat</span></p>
+            <p>
+              {" "}
+              <img src="/conversation.png" /> Your Messages{" "}
+              <span>Send a message to start a chat</span>
+            </p>
           </div>
           <NavigationDesktop onTabChange={setActiveTab} activeTab={activeTab} />
         </>

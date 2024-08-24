@@ -7,7 +7,6 @@ import TaskIcon from '@mui/icons-material/Task';
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { useSettingsLogic } from "../../Hooks/useSettingsLogic";
 
-// Define props interface
 interface SettingsContentMobileProps {
   userImage: string;
   userId: string;
@@ -71,7 +70,6 @@ export const SettingsContentMobile: React.FC<SettingsContentMobileProps> = ({ us
         <LogoutIcon className="settings-content-mobile-icon" />
       </div>
 
-      {/* Privacy Policy Modal */}
       <Modal
         open={openPrivacy}
         onClose={handleClosePrivacy}
@@ -89,7 +87,6 @@ export const SettingsContentMobile: React.FC<SettingsContentMobileProps> = ({ us
         </Box>
       </Modal>
 
-      {/* Terms of Service Modal */}
       <Modal
         open={openTerms}
         onClose={handleCloseTerms}
@@ -110,7 +107,6 @@ export const SettingsContentMobile: React.FC<SettingsContentMobileProps> = ({ us
   );
 };
 
-// Modal style
 const modalStyle = {
   position: 'absolute',
   top: '50%',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface SetupProfileMobileProps {
   nickname: string;
@@ -31,7 +31,7 @@ const SetupProfileMobile: React.FC<SetupProfileMobileProps> = ({
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`slide ${currentSlide === index ? 'active' : ''}`}
+            className={`slide ${currentSlide === index ? "active" : ""}`}
           >
             <div className="card">
               <h2>{slide.title}</h2>
@@ -65,8 +65,12 @@ const SetupProfileMobile: React.FC<SetupProfileMobileProps> = ({
 
       <div className="nav-btn">
         {currentSlide > 0 && <button onClick={prevSlide}>Previous</button>}
-        {currentSlide < slides.length - 1 && <button onClick={nextSlide}>Next</button>}
-        {currentSlide === slides.length - 1 && <button onClick={handleSubmit}>Submit</button>}
+        {currentSlide < slides.length - 1 && (
+          <button onClick={nextSlide}>Next</button>
+        )}
+        {currentSlide === slides.length - 1 && (
+          <button onClick={handleSubmit}>Submit</button>
+        )}
       </div>
     </div>
   );

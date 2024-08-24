@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("https://buzzchat-1lgf.onrender.com/");
+const socket = io("https://buzzchat-beo9.onrender.com/");
 
 interface Message {
   user: string;
@@ -29,7 +29,7 @@ export const useChatLogic = (friendUsername?: string, userUsername?: string) => 
   const fetchData = async () => {
     try {
       const response = await axios.get<DataItem[]>(
-        "https://buzzchat-1lgf.onrender.com/api/data"
+        "https://buzzchat-beo9.onrender.com/api/data"
       );
       const friend = response.data.find(
         (item) => item.nickname === friendUsername
@@ -41,10 +41,9 @@ export const useChatLogic = (friendUsername?: string, userUsername?: string) => 
       setFriendData(friend || null);
       setUserData(user || null);
 
-      // Mark messages as seen when chat is opened
       if (user && friend) {
         await axios.patch(
-          `https://buzzchat-1lgf.onrender.com/api/data/${friend._id}/markAsSeen`,
+          `https://buzzchat-beo9.onrender.com/api/data/${friend._id}/markAsSeen`,
           { user: userUsername }
         );
       }
@@ -77,11 +76,11 @@ export const useChatLogic = (friendUsername?: string, userUsername?: string) => 
       };
 
       await axios.patch(
-        `https://buzzchat-1lgf.onrender.com/api/data/${friendData._id}/messages`,
+        `https://buzzchat-beo9.onrender.com/api/data/${friendData._id}/messages`,
         messageForFriend
       );
       await axios.patch(
-        `https://buzzchat-1lgf.onrender.com/api/data/${userData._id}/messages`,
+        `https://buzzchat-beo9.onrender.com/api/data/${userData._id}/messages`,
         messageForUser
       );
 
@@ -128,6 +127,7 @@ export const useChatLogic = (friendUsername?: string, userUsername?: string) => 
     return () => {
       socket.off("receiveMessage", receiveMessageHandler);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [friendUsername, friendData, userUsername, userData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

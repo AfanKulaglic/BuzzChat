@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 
-const socketUrl = "https://buzzchat-1lgf.onrender.com/";
+const socketUrl = "https://buzzchat-beo9.onrender.com/";
 const socket: Socket = io(socketUrl);
 
 export interface Message {

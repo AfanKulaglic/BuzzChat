@@ -2,18 +2,20 @@ import React from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import EditIcon from "@mui/icons-material/Edit";
-import PolicyIcon from '@mui/icons-material/Policy';
-import TaskIcon from '@mui/icons-material/Task';
+import PolicyIcon from "@mui/icons-material/Policy";
+import TaskIcon from "@mui/icons-material/Task";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { useSettingsLogic } from "../../Hooks/useSettingsLogic";
 
-// Define props interface
 interface SettingsContentDesktopProps {
   userImage: string;
   userId: string;
 }
 
-export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ userImage, userId }) => {
+export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({
+  userImage,
+  userId,
+}) => {
   const {
     image,
     openPrivacy,
@@ -26,7 +28,7 @@ export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ 
     handleClosePrivacy,
     handleOpenTerms,
     handleCloseTerms,
-    toggleDarkMode
+    toggleDarkMode,
   } = useSettingsLogic(userImage, userId);
 
   return (
@@ -45,12 +47,12 @@ export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ 
       <input
         type="file"
         id="fileInput"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         accept="image/*"
         onChange={handleFileChange}
       />
       <span className="settings-content-mobile-span">Change profile image</span>
-      
+
       <div className="settings-content-mobile-item" onClick={handleOpenPrivacy}>
         <h4 className="settings-content-mobile-title">Privacy Policy</h4>
         <PolicyIcon className="settings-content-mobile-icon" />
@@ -62,16 +64,20 @@ export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ 
       </div>
 
       <div className="settings-content-mobile-item" onClick={toggleDarkMode}>
-        <h4 className="settings-content-mobile-title">{darkMode ? "Light Mode" : "Dark Mode"}</h4>
+        <h4 className="settings-content-mobile-title">
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </h4>
         <ColorLensIcon className="settings-content-mobile-icon" />
       </div>
 
-      <div className="settings-content-mobile-item-logout" onClick={handleLogout}>
+      <div
+        className="settings-content-mobile-item-logout"
+        onClick={handleLogout}
+      >
         <h4 className="settings-content-mobile-title">Logout</h4>
         <LogoutIcon className="settings-content-mobile-icon" />
       </div>
 
-      {/* Privacy Policy Modal */}
       <Modal
         open={openPrivacy}
         onClose={handleClosePrivacy}
@@ -83,13 +89,21 @@ export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ 
             Privacy Policy
           </Typography>
           <Typography id="privacy-policy-description" sx={{ mt: 2 }}>
-            At BuzzChat, your privacy is important to us. We collect personal information such as your name, email address, and profile picture, as well as data on your device and usage patterns. We use this information to enhance your experience, improve the app, and communicate with you. We do not share your personal information with third parties unless legally required. You have the right to access, update, or delete your data. Contact us at support@buzzchat.com for more details.
+            At BuzzChat, your privacy is important to us. We collect personal
+            information such as your name, email address, and profile picture,
+            as well as data on your device and usage patterns. We use this
+            information to enhance your experience, improve the app, and
+            communicate with you. We do not share your personal information with
+            third parties unless legally required. You have the right to access,
+            update, or delete your data. Contact us at support@buzzchat.com for
+            more details.
           </Typography>
-          <Button onClick={handleClosePrivacy} sx={{ mt: 2 }}>Close</Button>
+          <Button onClick={handleClosePrivacy} sx={{ mt: 2 }}>
+            Close
+          </Button>
         </Box>
       </Modal>
 
-      {/* Terms of Service Modal */}
       <Modal
         open={openTerms}
         onClose={handleCloseTerms}
@@ -101,23 +115,30 @@ export const SettingsContentDesktop: React.FC<SettingsContentDesktopProps> = ({ 
             Terms of Service
           </Typography>
           <Typography id="terms-of-service-description" sx={{ mt: 2 }}>
-            By using BuzzChat, you agree to our Terms of Service. You must register to use the app and maintain the confidentiality of your account. Prohibited activities include harassment, sharing illegal content, and hacking. We reserve the right to terminate accounts for violations. BuzzChat is provided "as is" without warranties, and we are not liable for damages resulting from app use. For full terms, please contact us at support@buzzchat.com.
+            By using BuzzChat, you agree to our Terms of Service. You must
+            register to use the app and maintain the confidentiality of your
+            account. Prohibited activities include harassment, sharing illegal
+            content, and hacking. We reserve the right to terminate accounts for
+            violations. BuzzChat is provided "as is" without warranties, and we
+            are not liable for damages resulting from app use. For full terms,
+            please contact us at support@buzzchat.com.
           </Typography>
-          <Button onClick={handleCloseTerms} sx={{ mt: 2 }}>Close</Button>
+          <Button onClick={handleCloseTerms} sx={{ mt: 2 }}>
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>
   );
 };
 
-// Modal style
 const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
 };

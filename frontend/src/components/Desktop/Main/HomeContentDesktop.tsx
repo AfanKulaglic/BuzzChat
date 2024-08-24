@@ -5,47 +5,47 @@ import { useNavigate } from "react-router-dom";
 interface NaHomeContentDesktopProps {
   userName: string;
   data: DataItem[];
-  onTabChange: (newValue: number) => void; // Dodaj funkciju za promenu taba u props
+  onTabChange: (newValue: number) => void;
 }
 
 export const NaHomeContentDesktop: React.FC<NaHomeContentDesktopProps> = ({
   userName,
   data,
-  onTabChange, // Primaš `onTabChange` kao props
+  onTabChange,
 }) => {
-  const { lastMessages, handleUserClick, getTimeDifference } = useHomeContentLogic({
-    userName,
-    data
-  });
+  const { lastMessages, handleUserClick, getTimeDifference } =
+    useHomeContentLogic({
+      userName,
+      data,
+    });
 
   const navigate = useNavigate();
 
   const handlePlusButtonClick = () => {
-    onTabChange(1); // Poziva `onTabChange` i postavlja tab na 1
+    onTabChange(1);
   };
 
   return (
     <div className="home-content-mobile-container home-content-desktop-container">
-      <div 
+      <div
         className="home-content-mobile-item-section"
-        onClick={() => navigate('/aiBot')} // Navigate to /aiBot
+        onClick={() => navigate("/aiBot")}
       >
         <img
-          src='/bot.png'
+          src="/bot.png"
           className="home-content-mobile-img"
           alt="Chat Bot AI"
         />
         <div className="home-content-mobile-section">
-          <h3 className="home-content-mobile-username">
-            Chat Bot AI
-          </h3>
+          <h3 className="home-content-mobile-username">Chat Bot AI</h3>
         </div>
       </div>
-      
+
       {[...lastMessages.values()].length === 0 ? (
         <div className="home-content-mobile-no-messages home-content-desktop-no-messages">
           <p className="home-content-mobile-no-messages-text">
-            You don't have any messages yet. Find friends to chat with!<br/>
+            You don't have any messages yet. Find friends to chat with!
+            <br />
             <button
               className="home-content-mobile-plus-button"
               onClick={handlePlusButtonClick}
@@ -56,10 +56,15 @@ export const NaHomeContentDesktop: React.FC<NaHomeContentDesktopProps> = ({
         </div>
       ) : (
         [...lastMessages.values()]
-          .sort((a, b) => new Date(b.message.timestamp).getTime() - new Date(a.message.timestamp).getTime())
+          .sort(
+            (a, b) =>
+              new Date(b.message.timestamp).getTime() -
+              new Date(a.message.timestamp).getTime()
+          )
           .map(({ message, item }) => {
-            const displayName = message.user === userName ? message.toUser : message.user;
-            let displayImage = "/defaultProfile.png";  // Default image
+            const displayName =
+              message.user === userName ? message.toUser : message.user;
+            let displayImage = "/defaultProfile.png";
 
             const matchedUser = data.find((d) => d.nickname === displayName);
             if (matchedUser) {
@@ -88,7 +93,8 @@ export const NaHomeContentDesktop: React.FC<NaHomeContentDesktopProps> = ({
                     {displayName}
                   </h3>
                   <p className="home-content-mobile-message">
-                    {message.user === userName ? "You: " : ""}{message.content}
+                    {message.user === userName ? "You: " : ""}
+                    {message.content}
                   </p>
                   {message.user === userName && (
                     <p className="home-content-mobile-seen">
